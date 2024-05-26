@@ -1,0 +1,22 @@
+syntax="proto3";
+option java_package="ma.esnet.stubs";
+service  BankService{
+  //type et le nom de la methode unary modele
+  rpc convert(ConvertCurrencyRequest ) returns(ConvertCurrencyResponse);//unary modele
+  rpc getCurrencyStream(ConvertCurrencyRequest) returns(stream ConvertCurrencyResponse);//server streaming
+  rpc performStream(stream ConvertCurrencyRequest) returns(ConvertCurrencyResponse);//client Streaming
+  rpc fullCurrencyStream(stream ConvertCurrencyRequest) returns (stream ConvertCurrencyResponse); //Bidirectionnal Stream
+}
+message ConvertCurrencyRequest{
+  string currencyFrom=1; // dhs
+  string currencyTo=2; //euros
+  double amount=3; //montant a convertir
+
+}
+// nous avons juste savoir le montant converti
+message ConvertCurrencyResponse{
+  string currencyFrom=1; // dhs
+  string currencyTo=2; //euros
+  double amount=3; //montant a convertir
+  double result=4;//resultat
+}
